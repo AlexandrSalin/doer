@@ -21,6 +21,8 @@ package by.salin.apps.doer.utils.tasks;
  */
 public interface ITaskResult
 {
+	Object getId();
+
 	ITaskStatus getStatus();
 
 	void setStatus(ITaskStatus status);

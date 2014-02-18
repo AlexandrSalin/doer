@@ -23,19 +23,21 @@ public interface TaskHandler<T>
 {
 	/**
 	 * Add new task in queue for execution
+	 *
 	 * @param task , in task required id field for identification,
 	 *             if id will be null throw IllegalArgumentException
 	 */
 	void addTask(T task);
 
-	void removeTask(Object taskId);
+	void onFailedAddTask(T task);
 
 	/**
 	 * Check task on exists in queue
+	 *
 	 * @param taskId
 	 * @return true if task with the Id already exists in queue, false otherwise
 	 */
 	boolean isTaskExists(Object taskId);
 
-	void onFailedAddTask(T task);
+	void removeTask(Object taskId);
 }

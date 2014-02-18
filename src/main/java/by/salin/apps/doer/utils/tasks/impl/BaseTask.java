@@ -20,8 +20,12 @@ import android.os.Bundle;
 import android.util.Log;
 import by.salin.apps.doer.utils.callbacks.ProgressCallback;
 import by.salin.apps.doer.utils.tasks.ITask;
+import by.salin.apps.doer.utils.tasks.ITaskResult;
+import by.salin.apps.doer.utils.tasks.ITaskStatus;
+import by.salin.apps.doer.utils.tasks.status.SeccesStatus;
 
 /**
+ * Base implementation for ITask
  * Created by alexander.salin on 05.12.13.
  */
 public abstract class BaseTask implements ITask
@@ -64,6 +68,22 @@ public abstract class BaseTask implements ITask
 			progressCallback.onProgressUpdate(id, progress);
 		}
 	}
+
+	@Override
+	public void rollback()
+	{
+		//do nothing
+	}
+
+/*	@Override
+	public ITaskResult call() throws Exception
+	{
+		ITaskResult result = new TaskResult();
+		ITaskStatus status = new SeccesStatus();
+		status.setData(params);
+		result.setStatus(status);
+		return result;
+	}*/
 
 	@Override
 	public float getProgressPart()

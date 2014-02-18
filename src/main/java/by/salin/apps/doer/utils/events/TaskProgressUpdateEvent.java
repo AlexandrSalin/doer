@@ -24,7 +24,7 @@ import by.salin.apps.jems.impl.Event;
  * the task identified by id.
  * Created by Alexandr.Salin on 22.12.13.
  */
-public class TaskProgressUpdateEvent extends Event
+public class TaskProgressUpdateEvent extends Event implements IDHandlerEvent
 {
 	private final Object id;
 	private final float progress;

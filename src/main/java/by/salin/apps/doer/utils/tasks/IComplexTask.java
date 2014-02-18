@@ -16,11 +16,9 @@
 
 package by.salin.apps.doer.utils.tasks;
 
-import by.salin.apps.doer.utils.callbacks.PartsProgressCallback;
-
 /**
  * Created by alexander.salin on 03.12.13.
  */
-public interface IComplexTask extends ITask, PartsProgressCallback
+public interface IComplexTask extends ITask
 {
 }

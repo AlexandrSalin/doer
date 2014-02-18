@@ -35,12 +35,6 @@ public class ComplexTask implements IComplexTask
 	private ITask[] taskQueue;
 	private Bundle params = null;
 
-	public ComplexTask(Object id, ITask[] taskQueue, Bundle params)
-	{
-		this(id, taskQueue);
-		this.params = params;
-	}
-
 	public ComplexTask(Object id, ITask[] taskQueue)
 	{
 		this.id = id;
@@ -53,7 +47,12 @@ public class ComplexTask implements IComplexTask
 			throw new IllegalArgumentException("Progress part for task should be set up, or sum of parts not equals 1. For example for three tasks parts may be set in [0.5,0.2,0.3]");
 		}
 		this.taskQueue = taskQueue;
+	}
 
+	public ComplexTask(Object id, ITask[] taskQueue, Bundle params)
+	{
+		this(id, taskQueue);
+		this.params = params != null ? params : new Bundle();
 	}
 
 	private boolean checkProgressPartsValid(ITask[] taskQueue)
@@ -74,7 +73,7 @@ public class ComplexTask implements IComplexTask
 	@Override
 	public ITaskResult call() throws Exception
 	{
-		ITaskResult result = new TaskResult();
+		ITaskResult result = new TaskResult(getId());
 		result.setStatus(new SeccesStatus());
 		try
 		{
@@ -118,14 +117,13 @@ public class ComplexTask implements IComplexTask
 	@Override
 	public void setInputParams(Bundle params)
 	{
-		//TODO
+		this.params = params;
 	}
 
 	@Override
 	public Bundle getOutputParams()
 	{
-		//TODO
-		return null;
+		return params;
 	}
 
 	@Override

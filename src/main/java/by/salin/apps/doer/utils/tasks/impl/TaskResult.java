@@ -21,11 +21,23 @@ import by.salin.apps.doer.utils.tasks.ITaskStatus;
 
 /**
  * base implementation for TaskResult
- * Created by alexander.salin on 03.12.13.
+ * Created by alexandr.salin on 03.12.13.
  */
-public class TaskResult implements ITaskResult
+public final class TaskResult implements ITaskResult
 {
+	private final Object _id;
 	ITaskStatus status;
+
+	public TaskResult(Object id)
+	{
+		this._id = id;
+	}
+
+	public TaskResult(Object id, ITaskStatus status)
+	{
+		this(id);
+		this.status = status;
+	}
 
 	@Override
 	public ITaskStatus getStatus()
@@ -38,4 +50,11 @@ public class TaskResult implements ITaskResult
 	{
 		this.status = status;
 	}
+
+	@Override
+	public Object getId()
+	{
+		return _id;
+	}
+
 }

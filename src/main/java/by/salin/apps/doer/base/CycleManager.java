@@ -16,7 +16,12 @@
 
 package by.salin.apps.doer.base;
 
+import android.util.Log;
 import by.salin.apps.doer.utils.callbacks.LifeCycleCallback;
+import by.salin.apps.doer.utils.events.TaskComplitedEvent;
+import by.salin.apps.doer.utils.tasks.impl.TaskResult;
+import by.salin.apps.doer.utils.tasks.status.FaildStatus;
+import by.salin.apps.jems.JEMS;
 
 import java.util.concurrent.ExecutionException;
 
@@ -25,6 +30,7 @@ import java.util.concurrent.ExecutionException;
  */
 public abstract class CycleManager implements LifeCycleCallback, Runnable
 {
+	private static final String TAG = CycleManager.class.getSimpleName();
 	private boolean isFinish = false;
 
 	public CycleManager()
@@ -45,7 +51,8 @@ public abstract class CycleManager implements LifeCycleCallback, Runnable
 		}
 		catch (Exception e)
 		{
-			//maybe alert event
+			Log.e(TAG,e.toString(),e);
+			JEMS.dispatcher().sendEvent(new TaskComplitedEvent(new TaskResult(new FaildStatus(e))));
 		}
 		finally
 		{

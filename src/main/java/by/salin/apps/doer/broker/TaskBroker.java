@@ -20,6 +20,9 @@ import android.util.Log;
 import by.salin.apps.doer.Doer;
 import by.salin.apps.doer.utils.callbacks.BindCallback;
 import by.salin.apps.doer.utils.events.AddNewTaskEvent;
+import by.salin.apps.doer.utils.events.TaskAddFailedEvent;
+import by.salin.apps.doer.utils.events.TaskComplitedEvent;
+import by.salin.apps.doer.utils.events.TaskProgressUpdateEvent;
 import by.salin.apps.doer.utils.tasks.ITask;
 import by.salin.apps.jems.EventHandlerCallback;
 import by.salin.apps.jems.JEMS;
@@ -47,7 +50,7 @@ public class TaskBroker implements BindCallback, EventHandlerCallback
 		getInstance();
 	}
 
-	public static TaskBroker getInstance()
+	private static TaskBroker getInstance()
 	{
 		if (instance == null)
 		{
@@ -99,5 +102,17 @@ public class TaskBroker implements BindCallback, EventHandlerCallback
 			ITask task = ((AddNewTaskEvent) event).getTask();
 			executor.addTask(task);
 		}
+	}
+
+	public static void register(EventHandlerCallback describer){
+		JEMS.dispatcher().addListenerOnEvent(TaskComplitedEvent.class,describer);
+		JEMS.dispatcher().addListenerOnEvent(TaskProgressUpdateEvent.class,describer);
+		JEMS.dispatcher().addListenerOnEvent(TaskAddFailedEvent.class,describer);
+	}
+
+	public static void unregister(EventHandlerCallback describer){
+		JEMS.dispatcher().removeListenerOnEvent(TaskComplitedEvent.class,describer);
+		JEMS.dispatcher().removeListenerOnEvent(TaskProgressUpdateEvent.class,describer);
+		JEMS.dispatcher().removeListenerOnEvent(TaskAddFailedEvent.class,describer);
 	}
 }

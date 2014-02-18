@@ -22,7 +22,7 @@ import by.salin.apps.jems.impl.Event;
 /**
  * Created by Alexandr.Salin on 22.12.13.
  */
-public class TaskAddFailedEvent extends Event
+public class TaskAddFailedEvent extends Event implements IDHandlerEvent
 {
 	private ITask task;
 
@@ -34,5 +34,11 @@ public class TaskAddFailedEvent extends Event
 	public ITask getTask()
 	{
 		return task;
+	}
+
+	@Override
+	public Object getId()
+	{
+		return task.getId();
 	}
 }

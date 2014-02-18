@@ -51,7 +51,7 @@ public class StubTask extends BaseTask
 	public ITaskResult call()
 	{
 		Log.i(TAG, "start:" + getId().toString());
-		ITaskResult result = new TaskResult();
+		ITaskResult result = new TaskResult(getId());
 		result.setStatus(new SeccesStatus());
 		for (int i = 0; i < 100; i++)
 		{
