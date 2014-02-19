@@ -47,13 +47,13 @@ public abstract class ThreadManager extends CycleManager implements IterationCal
 
 		if (config == null)
 		{
-			config = new DoerConfig.Builder().setThreadPoolSize(2).build();
+			config = new DoerConfig.Builder().setThreadPoolSize(5).build();
 		}
 		//FIXME what???
 		runnablesMap = Collections.synchronizedMap(new HashMap<Object, Future<ITaskResult>>());
 
 		workingQueue = new LinkedBlockingQueue<Runnable>();
-		executor = new ThreadPoolExecutor(config.threadPoolSize, config.threadPoolSize, 0, TimeUnit.SECONDS, workingQueue);
+		executor = new ThreadPoolExecutor(config.threadPoolSize, 128, 0, TimeUnit.SECONDS, workingQueue);
 		executorCompletionService = new ExecutorCompletionService<ITaskResult>(executor);
 	}
 
