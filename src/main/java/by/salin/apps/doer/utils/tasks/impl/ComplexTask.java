@@ -24,6 +24,8 @@ import by.salin.apps.doer.utils.tasks.ITaskResult;
 import by.salin.apps.doer.utils.tasks.status.FaildStatus;
 import by.salin.apps.doer.utils.tasks.status.SeccesStatus;
 
+import java.math.BigDecimal;
+
 
 /**
  * Created by Alexander.Salin on 03.12.13.
@@ -58,12 +60,13 @@ public class ComplexTask implements IComplexTask
 	private boolean checkProgressPartsValid(ITask[] taskQueue)
 	{
 		boolean result = true;
-		float sum = 0;
+		int sum = 0;
 		for (ITask task : taskQueue)
 		{
-			sum += task.getProgressPart();
+			int i = (int)(task.getProgressPart()*1000);
+			sum = sum+i;
 		}
-		if (sum != 1.0f)
+		if (sum / 1000 != 1.0f)
 		{
 			result = false;
 		}
