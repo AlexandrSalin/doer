@@ -35,7 +35,7 @@ public abstract class ThreadManager extends CycleManager implements IterationCal
 	public static final String TAG = ThreadManager.class.getSimpleName();
 	private static final int EXECUTER_SHUTDOWN_TIMOUT = 60;
 	private static DoerConfig config;
-	private Map<Object, Future<ITaskResult>> runnablesMap;
+	private final Map<Object, Future<ITaskResult>> runnablesMap = Collections.synchronizedMap(new HashMap<Object, Future<ITaskResult>>());
 	private LinkedBlockingQueue<Runnable> workingQueue;
 	private ExecutorService executor;
 	private ExecutorCompletionService<ITaskResult> executorCompletionService;
@@ -50,7 +50,7 @@ public abstract class ThreadManager extends CycleManager implements IterationCal
 			config = new DoerConfig.Builder().setThreadPoolSize(5).build();
 		}
 		//FIXME what???
-		runnablesMap = Collections.synchronizedMap(new HashMap<Object, Future<ITaskResult>>());
+		//runnablesMap = Collections.synchronizedMap(new HashMap<Object, Future<ITaskResult>>());
 
 		workingQueue = new LinkedBlockingQueue<Runnable>();
 		executor = new ThreadPoolExecutor(config.threadPoolSize, 128, 0, TimeUnit.SECONDS, workingQueue);

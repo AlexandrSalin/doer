@@ -16,8 +16,8 @@
 
 package by.salin.apps.doer.base;
 
-import by.salin.apps.doer.utils.callbacks.ProgressCallback;
 import by.salin.apps.doer.TaskHandler;
+import by.salin.apps.doer.utils.callbacks.ProgressCallback;
 import by.salin.apps.doer.utils.tasks.ITask;
 import by.salin.apps.doer.utils.tasks.ITaskResult;
 
@@ -36,7 +36,7 @@ public abstract class TaskManager extends ThreadManager implements TaskHandler<I
 		{
 			throw new IllegalArgumentException("ComplexTask should have non null id");
 		}
-		Map<Object, Future<ITaskResult>> queue = getQueue();
+		final Map<Object, Future<ITaskResult>> queue = getQueue();
 		synchronized (queue)
 		{
 			if (queue.containsKey(task.getId()))
@@ -54,7 +54,7 @@ public abstract class TaskManager extends ThreadManager implements TaskHandler<I
 	@Override
 	public void removeTask(Object taskId)
 	{
-		Map<Object, Future<ITaskResult>> queue = getQueue();
+		final Map<Object, Future<ITaskResult>> queue = getQueue();
 		synchronized (queue)
 		{
 			queue.remove(taskId);
@@ -64,7 +64,7 @@ public abstract class TaskManager extends ThreadManager implements TaskHandler<I
 	@Override
 	public boolean isTaskExists(Object taskId)
 	{
-		Map<Object, Future<ITaskResult>> queue = getQueue();
+		final Map<Object, Future<ITaskResult>> queue = getQueue();
 		synchronized (queue)
 		{
 			return queue.containsKey(taskId);
