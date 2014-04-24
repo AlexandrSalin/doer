@@ -1,0 +1,21 @@
+apply plugin: 'android-library'
+repositories {
+    mavenCentral()
+    maven {
+        credentials {
+            username 'admin'
+            password '***REMOVED***'
+        }
+        url 'http://nexus.tanjarine.us/content/repositories/thirdparty/'
+    }
+}
+dependencies {
+    compile "by.salin:JEMS:0.0.1"
+}
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.0.1"
+}
+
+apply from: '../maven_push.gradle'
