@@ -53,7 +53,7 @@ public abstract class ThreadManager extends CycleManager implements IterationCal
 		//runnablesMap = Collections.synchronizedMap(new HashMap<Object, Future<ITaskResult>>());
 
 		workingQueue = new LinkedBlockingQueue<Runnable>();
-		executor = new ThreadPoolExecutor(config.threadPoolSize, 2, 2, TimeUnit.SECONDS, workingQueue);
+		executor = new ThreadPoolExecutor(config.threadPoolSize, 128, 0, TimeUnit.SECONDS, workingQueue);
 		executorCompletionService = new ExecutorCompletionService<ITaskResult>(executor);
 	}
 
